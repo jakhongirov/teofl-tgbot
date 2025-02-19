@@ -1,0 +1,15 @@
+{
+	"startText": "Assalomu alaykum %user%! 150 MILLION GRAND sohibiga aylaning! Ro'yxatdan o'tish uchun iltimos, pastdagi tugma orqali kontaktingizni yuboring..",
+	"sendContactBtn": "👤 Kontakt yuborish",
+	"askGender": "Jinsingizni tanlang:",
+	"askName": "Iltimos, To'liq ismingizni passportda yozilgani kabi yozing:\nMasalan: Abror Ahmadov Nodir o'gli",
+	"askBirthdate": "Iltimos, Tug'ilgan sanangizni yozing:\nMasalan: 10.04.2006 (kun.oy.yil)",
+	"askBirthdateError": "Noto'g'ri format. Iltimos, Tug'ilgan sanangizni yozing:\nMasalan: 10.04.2006 (kun.oy.yil)",
+	"askPassport": "Iltimos, Passport seriya raqamini yozing:",
+	"askEmail": "Iltimos, Elektron pochtangizni yozing:\nMasalan: abrorahmadov@gmail.com",
+	"askRegion": "Iltimos, Shahringizni tanlang:",
+	"askAddress": "Iltimos, Manzilingizni yozing:",
+	"askExamDate": "Iltimos, imtihon kunini tanlang:",
+	"askPayment": "Imtihon to'lovini ushbu karta raqamiga to'lov qiling va chekini botga yuboring.\n\nKarta raqam: 8600 1402 6738 6416 Valiyev Komron\nTo'lov summasi: %price% so'm",
+	"endText": "Muvaffaqiyatli ro'yxatdan o'tdingiz!"
+}
