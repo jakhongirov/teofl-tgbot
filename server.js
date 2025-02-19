@@ -15,7 +15,7 @@ const botText = require('./text.json')
 const { regionsBtn, examDateBtn } = require('./data')
 const { examPrice } = require('./src/lib/currency')
 const { downloadAndSaveFile } = require('./src/lib/download/download')
-const { validateDate } = require('./src/lib/validDate')
+const { validateDate, validateEmail, validateCustomID } = require('./src/lib/validators')
 
 const publicFolderPath = path.join(__dirname, 'public');
 const imagesFolderPath = path.join(publicFolderPath, 'images');
@@ -188,28 +188,46 @@ bot.on('message', async (msg) => {
 
 
    } else if (foundUser?.step == 'ask_passport') {
-      const addPassport = await model.addPassport(chatId, text)
 
-      if (addPassport) {
-         bot.sendMessage(chatId, botText.askEmail)
+      if (validateCustomID(text)) {
+         const addPassport = await model.addPassport(chatId, text)
+
+         if (addPassport) {
+            bot.sendMessage(chatId, botText.askEmail)
+               .then(async () => {
+                  await model.editStep(chatId, 'ask_email')
+               })
+         }
+      } else {
+         bot.sendMessage(chatId, botText.askPassportError)
+            .then(async () => {
+               await model.editStep(chatId, 'ask_passport')
+            })
+      }
+
+   } else if (foundUser?.step == 'ask_email') {
+
+      if (validateEmail(text)) {
+         const addEmail = await model.addEmail(chatId, text)
+
+         if (addEmail) {
+            bot.sendMessage(chatId, botText.askRegion, {
+               reply_markup: {
+                  keyboard: regionsBtn,
+                  resize_keyboard: true,
+               }
+            })
+               .then(async () => {
+                  await model.editStep(chatId, 'ask_region')
+               })
+         }
+      } else {
+         bot.sendMessage(chatId, botText.askEmailError)
             .then(async () => {
                await model.editStep(chatId, 'ask_email')
             })
       }
-   } else if (foundUser?.step == 'ask_email') {
-      const addEmail = await model.addEmail(chatId, text)
 
-      if (addEmail) {
-         bot.sendMessage(chatId, botText.askRegion, {
-            reply_markup: {
-               keyboard: regionsBtn,
-               resize_keyboard: true,
-            }
-         })
-            .then(async () => {
-               await model.editStep(chatId, 'ask_region')
-            })
-      }
    } else if (foundUser?.step == 'ask_region') {
       const addRegion = await model.addRegion(chatId, text)
 
