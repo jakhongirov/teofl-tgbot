@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const SPREADSHEET_ID = process.env.SHEET_ID; // Replace with your Google Sheet ID
 
-const credentials = JSON.parse(fs.readFileSync("credentials.json"));
+const credentials = JSON.parse(fs.readFileSync(path.resolve(__dirname, "credentials.json")));
 
 async function addUserToSheet(name, phone, gander, email, birthDate, city, address, passport, exam_date, link) {
    const auth = new google.auth.GoogleAuth({
